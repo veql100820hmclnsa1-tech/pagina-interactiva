@@ -1,0 +1,33 @@
+:root{--azul:#2446a8;--azul-oscuro:#172554;--morado:#7655d9;--turquesa:#0d9488;--fondo:#f3f6fc;--texto:#243047;--gris:#68758b;--blanco:#fff;--borde:#e0e7f1;--sombra:0 8px 28px rgba(27,43,80,.08)}
+*{box-sizing:border-box}body{margin:0;font-family:"Segoe UI",Arial,sans-serif;background:var(--fondo);color:var(--texto);line-height:1.65}
+button,input,select{font:inherit}button{cursor:pointer}
+[hidden]{display:none!important}
+.encabezado{background:linear-gradient(120deg,#172554,#2446a8,#6247c7);color:#fff;padding:24px 5%;display:flex;align-items:center;justify-content:space-between;gap:20px;flex-wrap:wrap}
+.marca{display:flex;align-items:center;gap:14px}.marca-icono{display:grid;place-items:center;width:52px;height:52px;background:rgba(255,255,255,.16);border-radius:15px;font-size:28px}
+.marca h1{margin:0;font-size:25px}.marca p{margin:2px 0 0;color:#dbeafe;font-size:14px}
+.estado-sesion{padding:8px 15px;border:1px solid rgba(255,255,255,.35);border-radius:30px;font-size:13px}
+.contenedor{width:min(1100px,92%);margin:32px auto}.panel{background:var(--blanco);border:1px solid var(--borde);border-radius:20px;padding:30px;margin-bottom:25px;box-shadow:var(--sombra)}
+.panel h2{margin-top:5px;font-size:clamp(22px,3vw,29px)}.etiqueta{display:inline-block;color:var(--azul);font-size:11px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase}
+.registro-panel{max-width:700px;margin:0 auto 30px}label{display:block;font-weight:700;margin:15px 0 6px}
+input,select{display:block;width:100%;padding:12px 14px;background:#fbfcff;border:1px solid #cbd5e1;border-radius:10px}
+small{display:block;color:var(--gris);margin-top:5px}.separador{border-top:1px solid var(--borde);text-align:center;margin:28px 0 15px}
+.separador span{display:inline-block;background:#fff;color:var(--gris);padding:0 12px;transform:translateY(-13px)}
+.boton{display:inline-flex;align-items:center;justify-content:center;gap:8px;border-radius:11px;padding:12px 19px;font-weight:700;border:1px solid transparent;transition:.2s}
+.boton:hover{transform:translateY(-2px)}.boton-principal{width:100%;margin-top:22px;color:#fff;background:linear-gradient(110deg,var(--azul),var(--morado))}.boton-secundario{background:#fff;color:var(--azul);border-color:#cbd5e1;margin-top:12px}
+.boton:disabled{opacity:.6;pointer-events:none}
+.mensaje{font-weight:600;min-height:20px;margin-top:10px}
+.bienvenida{background:linear-gradient(120deg,#e9f0ff,#f4edff);display:flex;align-items:center;justify-content:space-between;gap:25px}.bienvenida-icono{font-size:60px;background:#fff;border-radius:22px;padding:15px}
+.materias{display:grid;grid-template-columns:repeat(2,1fr);gap:20px}.tarjeta-materia{text-align:left;padding:25px;border-radius:17px;border:1px solid var(--borde);background:#fff;transition:.2s}
+.tarjeta-materia:hover{transform:translateY(-4px);box-shadow:var(--sombra)}.tarjeta-materia.lengua{border-top:5px solid #7655d9}.tarjeta-materia.matematicas{border-top:5px solid #0d9488}.materia-icono{font-size:35px}
+.selector-niveles{display:flex;gap:10px;flex-wrap:wrap;margin:20px 0}.boton-nivel{border:1px solid var(--borde);background:#f8fafc;padding:10px 20px;border-radius:30px;font-weight:700}
+.boton-nivel.activo{background:var(--azul);border-color:var(--azul);color:#fff}
+.lista-temas{display:grid;grid-template-columns:repeat(2,1fr);gap:13px}.tema-card{display:block;text-align:left;padding:18px;border:1px solid var(--borde);border-radius:13px;background:#fbfcff;cursor:pointer}
+.tema-card:hover{border-color:var(--morado);background:#f7f4ff}.tema-card strong{display:block;margin-bottom:5px}.tema-card span{color:var(--gris);font-size:13px}
+.bloque-explicacion,.bloque-ejemplo{padding:20px;margin:17px 0;border-radius:13px}.bloque-explicacion{background:#f0f5ff;border-left:4px solid var(--azul)}.bloque-ejemplo{background:#eafaf5;border-left:4px solid var(--turquesa)}.bloque-explicacion p,.bloque-ejemplo p{white-space:pre-line;margin:0}
+.pregunta{border:1px solid var(--borde);padding:20px;border-radius:13px;margin:16px 0;background:#fff}.opcion{display:flex;gap:10px;padding:10px;margin-top:7px;border-radius:9px;background:#f8fafc;cursor:pointer;border:2px solid transparent}
+.opcion:hover{background:#eef2ff}.opcion.correcta{background:#dcfce7!important;border-color:#16a34a!important}.opcion.incorrecta{background:#fee2e2!important;border-color:#dc2626!important}
+.resultado{margin-top:25px;padding:25px;border-radius:15px;background:#edf8f2;border:1px solid #b7e4ca}.puntaje-grande{font-size:28px;font-weight:800;color:#166534}
+.resumen-avance{display:grid;grid-template-columns:repeat(2,1fr);gap:15px;margin:20px 0}.dato-avance{padding:22px;border-radius:14px;background:#f0f5ff;text-align:center}.dato-avance span{font-size:30px;color:var(--azul);font-weight:800}
+.historial{margin-top:18px}.registro-historial{border-bottom:1px solid var(--borde);padding:13px 0}.registro-historial strong{display:block}.registro-historial span{color:var(--gris);font-size:13px}
+footer{text-align:center;padding:25px;color:var(--gris);font-size:13px}
+@media(max-width:650px){.contenedor{width:94%}.panel{padding:20px}.materias,.lista-temas{grid-template-columns:1fr}}

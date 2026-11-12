@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Reto Educativo | Aprende y supera tus límites</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@400;500;600;700&display=swap');
+:root{--negro:#100e0c;--negro2:#191613;--beige:#c7b69d;--dorado:#c6a66b;--crema:#eee5d7;--blanco:#fffaf2;--gris:#a99d8d;--verde:#22c55e;--rojo:#ef4444}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--negro);color:var(--crema);font-family:'DM Sans',sans-serif;min-height:100vh}
+button,input{font:inherit}button{cursor:pointer}
+.oculto{display:none!important}
+.encabezado{display:flex;justify-content:space-between;align-items:center;padding:25px 7%;border-bottom:1px solid #ffffff18;flex-wrap:wrap;gap:12px}
+.logo{font-family:'Playfair Display',serif;font-size:27px;color:var(--dorado);letter-spacing:3px}.logo span{color:var(--blanco)}
+.menu{display:flex;gap:22px;align-items:center;flex-wrap:wrap}.menu a{color:var(--gris);text-decoration:none;font-size:13px}.menu a:hover{color:var(--dorado)}
+.portada{min-height:320px;padding:70px 8%;display:flex;flex-direction:column;justify-content:center;background:linear-gradient(90deg,#17130f 0%,#17130fe8 55%,#17130f88 100%),radial-gradient(circle at 85% 50%,#75604455,transparent 40%);border-bottom:1px solid #ffffff18}
+.etiqueta{color:var(--dorado);font-size:12px;letter-spacing:4px;text-transform:uppercase;margin-bottom:20px}
+.portada h1{font-family:'Playfair Display',serif;font-size:clamp(40px,7vw,75px);font-weight:400;line-height:1.05;max-width:750px;margin-bottom:20px}
+.portada h1 span{color:var(--dorado);font-style:italic}.portada p{color:var(--gris);max-width:550px;line-height:1.8;font-size:15px}
+.linea{width:65px;height:2px;background:var(--dorado);margin:25px 0}
+.boton{border:1px solid var(--dorado);background:transparent;color:var(--dorado);padding:12px 23px;border-radius:2px;font-size:13px;letter-spacing:1px;transition:.3s}.boton:hover{background:var(--dorado);color:var(--negro)}
+.boton-dorado{background:var(--dorado);color:var(--negro)}.boton-dorado:hover{background:var(--crema);border-color:var(--crema)}
+.boton:disabled{opacity:.6;pointer-events:none}
+.contenedor{width:88%;max-width:1150px;margin:55px auto}
+.titulo-seccion{font-family:'Playfair Display',serif;font-size:35px;font-weight:400;margin-bottom:12px}
+.descripcion{color:var(--gris);font-size:14px;line-height:1.8;margin-bottom:30px}
+.tarjetas{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:20px}
+.tarjeta{background:var(--negro2);border:1px solid #ffffff18;padding:28px;transition:.3s}.tarjeta:hover{border-color:var(--dorado);transform:translateY(-4px)}
+.numero{font-family:'Playfair Display',serif;font-size:35px;color:var(--dorado);margin-bottom:18px}
+.tarjeta h3{font-family:'Playfair Display',serif;font-size:23px;font-weight:400;margin-bottom:12px}
+.tarjeta p{font-size:13px;line-height:1.8;color:var(--gris);margin-bottom:20px}
+.formulario{background:var(--negro2);border:1px solid #ffffff20;padding:35px;max-width:520px;margin:40px auto}
+.formulario h2{font-family:'Playfair Display',serif;font-weight:400;font-size:32px;margin-bottom:10px}
+.formulario p{color:var(--gris);font-size:13px;margin-bottom:25px}
+.campo{margin-bottom:18px}.campo label{display:block;color:var(--beige);font-size:12px;margin-bottom:9px}
+.campo input,.campo select{width:100%;padding:13px;background:#100e0c;border:1px solid #ffffff30;color:var(--blanco);outline:none}.campo input:focus{border-color:var(--dorado)}
+.enlace{color:var(--dorado);background:none;border:none;font-size:13px;margin-top:18px;text-decoration:underline}
+.niveles{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:15px}
+.nivel{padding:25px;background:#201b15;border:1px solid #ffffff20;color:var(--crema);text-align:left;transition:.3s}.nivel:hover{border-color:var(--dorado);background:#30271c}
+.nivel strong{display:block;color:var(--dorado);font-family:'Playfair Display',serif;font-size:22px;margin-bottom:10px}.nivel span{font-size:12px;color:var(--gris)}
+.lista-temas{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:18px;margin-top:20px}
+.tema-card{background:#201b15;border:1px solid #ffffff20;padding:24px;text-align:left;color:var(--crema);transition:.3s;border-radius:4px}
+.tema-card:hover{border-color:var(--dorado);transform:translateY(-3px);background:#2a231a}
+.tema-card strong{font-family:'Playfair Display',serif;font-size:21px;color:var(--dorado);display:block;margin-bottom:10px}
+.tema-card p{font-size:13px;color:var(--gris);line-height:1.7;margin-bottom:15px}
+.tema-card span{font-size:12px;color:var(--dorado);letter-spacing:1px}
+.leccion{background:var(--negro2);border:1px solid #ffffff20;padding:30px;margin:20px 0}.leccion h3{color:var(--dorado);font-family:'Playfair Display',serif;font-size:25px;font-weight:400;margin-bottom:15px}
+.leccion p{line-height:1.9;color:var(--gris);font-size:14px;margin-bottom:15px;white-space:pre-line}
+.pregunta{background:#201b15;padding:22px;margin:15px 0;border-left:2px solid var(--dorado)}
+.pregunta h4{margin-bottom:15px;font-weight:500}
+.opcion{display:block;padding:10px;color:var(--gris);font-size:13px;cursor:pointer}.opcion input{accent-color:var(--dorado);margin-right:10px}
+.opcion.correcta{background:#1a3a2a!important;color:#d1fae5!important}.opcion.incorrecta{background:#4a1a1a!important;color:#fecaca!important}
+.resultado{border:1px solid #ffffff25;padding:20px;margin:15px 0;background:var(--negro2)}.resultado strong{color:var(--dorado)}
+.mensaje{padding:13px;margin:15px 0;color:var(--crema);background:#c6a66b20;border-left:3px solid var(--dorado);font-size:13px}
+.juego-card .emoji{font-size:38px;margin-bottom:12px;display:block}
+.juego-card .badge{display:inline-block;font-size:11px;letter-spacing:1px;padding:4px 10px;border-radius:20px;background:#c6a66b22;color:var(--dorado);margin-bottom:12px}
+.juego-box{background:var(--negro2);border:1px solid #ffffff20;padding:30px;border-radius:8px}
+.juego-top{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap;align-items:center;margin-bottom:18px}
+.pill{background:#201b15;border:1px solid #ffffff20;padding:8px 14px;border-radius:20px;font-size:13px}.pill b{color:var(--dorado)}
+.barra{height:10px;background:#201b15;border-radius:20px;overflow:hidden;margin:12px 0 20px}.barra div{height:100%;background:var(--dorado);width:0%;transition:.4s}
+.juego-pregunta{font-family:'Playfair Display',serif;font-size:28px;line-height:1.4;margin-bottom:8px}
+.juego-texto{color:var(--gris);font-size:14px;line-height:1.7;margin-bottom:18px;white-space:pre-line}
+.opciones-juego{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.btn-juego{padding:22px 12px;min-height:64px;background:#201b15;border:1px solid #ffffff25;color:var(--crema);font-size:17px;font-weight:600;border-radius:10px;text-align:center;transition:.2s}
+.btn-juego:hover{border-color:var(--dorado);background:#2a231a;transform:translateY(-2px)}
+.btn-juego.ok{background:#14532d!important;border-color:var(--verde)!important;color:white}
+.btn-juego.mal{background:#7f1d1d!important;border-color:var(--rojo)!important;color:white}
+.btn-vf{padding:22px;font-size:20px;font-weight:700}
+.feedback{margin-top:16px;padding:14px;border-radius:6px;font-size:14px;line-height:1.6}
+.feedback.ok{background:#14532d22;border:1px solid var(--verde);color:#bbf7d0}
+.feedback.mal{background:#7f1d1d22;border:1px solid var(--rojo);color:#fecaca}
+.timer{font-weight:700;color:var(--dorado);font-size:18px}.timer.peligro{color:var(--rojo);animation:parpadea .7s infinite}
+@keyframes parpadea{50%{opacity:.4}}
+/* NUEVO */
+.buscador{width:100%;padding:14px;background:#100e0c;border:1px solid #ffffff30;color:white;border-radius:6px;margin:10px 0 5px}
+.perfil-box{background:linear-gradient(90deg,#201b15,#2a231a);border:1px solid var(--dorado);padding:20px;border-radius:8px;margin:16px 0;display:flex;gap:16px;flex-wrap:wrap;justify-content:space-between;align-items:center}
+.medalla{display:inline-block;background:#c6a66b22;border:1px solid var(--dorado);padding:6px 12px;border-radius:20px;font-size:12px;margin:3px}
+.reto-dia{background:#201b15;border-left:3px solid var(--dorado);padding:20px;border-radius:8px;margin:18px 0}
+.podio{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:12px;margin:14px 0}
+.podio div{background:#201b15;border:1px solid #ffffff20;padding:16px;border-radius:8px;text-align:center}
+.podio div:first-child{border-color:var(--dorado);background:#2a231a}
+.certificado{background:white;color:#111;padding:35px;text-align:center;border:3px solid var(--dorado);border-radius:10px;max-width:600px;margin:20px auto}
+.certificado h2{font-family:'Playfair Display',serif;font-size:34px;color:#8a6d2e}
+.switch{border:1px solid var(--dorado);background:transparent;color:var(--dorado);padding:8px 14px;border-radius:20px;font-size:12px}
+/* MODO CLARO */
+body.claro{background:#f5efe6;color:#222}
+body.claro .encabezado,body.claro .tarjeta,body.claro .formulario,body.claro .juego-box,body.claro .tema-card,body.claro .nivel,body.claro .leccion,body.claro .pregunta,body.claro .resultado,body.claro .reto-dia{ background:#fff;border-color:#d9c9a8;color:#222}
+body.claro .portada{background:#efe6d4;color:#222}
+body.claro .logo span,body.claro .menu a{color:#333}
+body.claro .descripcion,body.claro .tarjeta p,body.claro .juego-texto,body.claro .tema-card p{color:#555}
+body.claro .btn-juego{background:#fff;color:#222;border-color:#d9c9a8}
+body.claro .campo input{background:white;color:#222}
+body.claro .buscador{background:white;color:#222}
+footer{border-top:1px solid #ffffff20;text-align:center;padding:30px;color:var(--gris);font-size:12px;margin-top:60px}
+@media(max-width:650px){.encabezado{flex-direction:column;gap:15px}.menu{flex-wrap:wrap;justify-content:center}.portada{padding:55px 7%}.contenedor{width:92%}.formulario{padding:22px}.juego-box{padding:18px}.opciones-juego{grid-template-columns:1fr}.btn-juego{padding:20px;font-size:18px}}
+</style>
+</head>
+<body>
+<header class="encabezado">
+<div class="logo">RETO <span>EDUCATIVO.</span></div>
+<nav class="menu"><a href="#" onclick="mostrarInicio();return false">Inicio</a><a href="#" onclick="mostrarMaterias();return false">Materias</a><a href="#" onclick="mostrarJuegos();return false">🎮 Juegos</a><a href="#" onclick="mostrarAvance();return false">Mi avance</a><button class="switch" onclick="cambiarModo()">☀️ / 🌙 Modo</button><button class="boton" id="btnSalir" onclick="cerrarSesion()" hidden>Cerrar sesión</button></nav>
+</header>
+
+<section class="portada" id="portada"><div class="etiqueta">Aprendizaje · Conocimiento · Superación</div><h1>Descubre tu potencial y alcanza tu <span>mejor versión.</span></h1><div class="linea"></div><p>Una experiencia educativa diseñada para fortalecer tus habilidades de comprensión lectora y pensamiento matemático mediante retos interactivos y niveles progresivos.</p></section>
+<section class="contenedor" id="registro"><div class="formulario"><div class="etiqueta">Comienza tu experiencia</div><h2>Crea tu cuenta</h2><p>Regístrate para guardar tu aprendizaje y consultar tus resultados.</p><form id="formRegistro"><div class="campo"><label>Nombre</label><input type="text" id="nombreRegistro" required maxlength="80"></div><div class="campo"><label>Edad</label><input type="number" id="edadRegistro" min="5" max="100" required></div><div class="campo"><label>Contraseña</label><input type="password" id="passwordRegistro" minlength="4" required></div><button class="boton boton-dorado" type="submit">Crear mi cuenta</button></form><button class="enlace" onclick="cambiarFormulario('login')">¿Ya tienes una cuenta? Inicia sesión</button><div id="mensajeRegistro"></div></div></section>
+<section class="contenedor oculto" id="login"><div class="formulario"><div class="etiqueta">Qué gusto tenerte aquí</div><h2>Bienvenido de nuevo</h2><p>Ingresa tus datos para continuar aprendiendo.</p><form id="formLogin"><div class="campo"><label>Nombre</label><input type="text" id="nombreLogin" required></div><div class="campo"><label>Contraseña</label><input type="password" id="passwordLogin" required></div><button class="boton boton-dorado" type="submit">Iniciar sesión</button></form><button class="enlace" onclick="cambiarFormulario('registro')">Crear una cuenta nueva</button><div id="mensajeLogin"></div></div></section>
+
+<!-- PANEL CON PERFIL + RETO DEL DIA -->
+<section class="contenedor oculto" id="panel"><div class="etiqueta">Tu espacio de aprendizaje</div><h2 class="titulo-seccion">Bienvenido, <span id="nombreEstudiante" style="color:var(--dorado)"></span></h2>
+<div class="perfil-box"><div><b id="nivelUsuario">🏆 Nivel 1 · Principiante</b><div style="margin-top:8px">⭐ Puntos totales: <b id="puntosTotales" style="color:var(--dorado)">0</b> · 🔥 Racha: <span id="rachaTotal">0 días</span></div><div id="medallasUsuario" style="margin-top:10px"></div></div><button class="boton" onclick="mostrarAvance()">Ver mi avance →</button></div>
+<div class="reto-dia" id="retoDiaBox"><div class="etiqueta">🎯 Reto del día</div><h3 id="retoDiaPregunta" style="font-family:'Playfair Display';font-size:22px;margin-bottom:10px"></h3><div id="retoDiaOpciones" style="display:flex;gap:10px;flex-wrap:wrap"></div><div id="retoDiaFeedback"></div></div>
+<p class="descripcion">Cada reto es una oportunidad para aprender algo nuevo. Selecciona una materia y comienza.</p><div class="tarjetas"><div class="tarjeta"><div class="numero">01</div><h3>Lengua y Comunicación</h3><p>Desarrolla tu comprensión lectora, interpretación y análisis de textos.</p><button class="boton" onclick="seleccionarMateria('Lengua y Comunicación')">Explorar materia</button></div><div class="tarjeta"><div class="numero">02</div><h3>Matemáticas</h3><p>Fortalece el razonamiento lógico y la resolución de problemas matemáticos.</p><button class="boton" onclick="seleccionarMateria('Matemáticas')">Explorar materia</button></div><div class="tarjeta juego-card"><span class="emoji">🎮</span><span class="badge">NUEVO · JUEGA Y APRENDE</span><h3>Zona de Juegos</h3><p>6 juegos interactivos con puntos, tiempo y racha. ¡Compite contigo mismo!</p><button class="boton boton-dorado" onclick="mostrarJuegos()">Jugar ahora →</button></div></div></section>
+
+<section class="contenedor oculto" id="seccionJuegos"><div class="etiqueta">Aprende jugando</div><h2 class="titulo-seccion">🎮 Zona de Juegos</h2>
+<div style="display:flex;gap:10px;flex-wrap:wrap;margin:12px 0"><button class="boton boton-dorado" id="btnModoNormal" onclick="setModoJuego(false)">🏆 Modo Competencia (guarda puntos)</button><button class="boton" id="btnModoPractica" onclick="setModoJuego(true)">📚 Modo Práctica (sin calificación)</button></div><p id="textoModoJuego" class="mensaje">Estás en Modo Competencia: tu resultado se guarda en Mi avance y en el Ranking.</p>
+<h3 style="color:var(--dorado);font-family:'Playfair Display';margin:18px 0 10px">🏆 Ranking - Top 5</h3><div class="podio" id="podioRanking"></div>
+<p class="descripcion">Elige un juego. Cada partida tiene 8 preguntas, puntos por acierto + bonus por racha.</p>
+<h3 style="color:var(--dorado);font-family:'Playfair Display';margin:18px 0 14px">🔢 Matemáticas</h3>
+<div class="tarjetas">
+<div class="tarjeta juego-card"><span class="emoji">⚡</span><span class="badge">MATEMÁTICAS · 10 SEG</span><h3>Cálculo Relámpago</h3><p>Operaciones aleatorias: suma, resta, multiplicación, división y decimales.</p><button class="boton boton-dorado" onclick="iniciarJuego('calculo')">▶ Jugar</button></div>
+<div class="tarjeta juego-card"><span class="emoji">🎯</span><span class="badge">MATEMÁTICAS</span><h3>Atrapa el Resultado</h3><p>Fracciones, áreas, álgebra y sistemas. Atrapa la correcta.</p><button class="boton boton-dorado" onclick="iniciarJuego('atrapa')">▶ Jugar</button></div>
+<div class="tarjeta juego-card"><span class="emoji">✅❌</span><span class="badge">MATEMÁTICAS · RÁPIDO</span><h3>Verdadero o Falso Exprés</h3><p>¿Es cierto que 2(x+3) = 2x+6? Decide rápido.</p><button class="boton boton-dorado" onclick="iniciarJuego('vf')">▶ Jugar</button></div>
+</div>
+<h3 style="color:var(--dorado);font-family:'Playfair Display';margin:28px 0 14px">📚 Lengua y Comunicación</h3>
+<div class="tarjetas">
+<div class="tarjeta juego-card"><span class="emoji">📖</span><span class="badge">LENGUA</span><h3>¿Qué tipo de texto es?</h3><p>Narrativo, descriptivo, instructivo, argumentativo o expositivo.</p><button class="boton boton-dorado" onclick="iniciarJuego('tipos')">▶ Jugar</button></div>
+<div class="tarjeta juego-card"><span class="emoji">🔗</span><span class="badge">LENGUA</span><h3>Conectores Locos</h3><p>Completa con sin embargo, por lo tanto, además, aunque...</p><button class="boton boton-dorado" onclick="iniciarJuego('conectores')">▶ Jugar</button></div>
+<div class="tarjeta juego-card"><span class="emoji">✨</span><span class="badge">LENGUA</span><h3>Figuras e Ideas</h3><p>¿Metáfora, símil o personificación? ¿Cuál es la idea principal?</p><button class="boton boton-dorado" onclick="iniciarJuego('figuras')">▶ Jugar</button></div>
+</div>
+<button class="boton" onclick="mostrarMaterias()" style="margin-top:24px">← Volver a materias</button></section>
+
+<section class="contenedor oculto" id="seccionJuegoActivo"><div class="etiqueta" id="juegoCategoria"></div><h2 class="titulo-seccion" id="juegoTitulo"></h2><div class="juego-box"><div class="juego-top"><span class="pill">Pregunta <b id="juegoProgreso">1 / 8</b></span><span class="pill">⭐ Puntos: <b id="juegoPuntos">0</b></span><span class="pill">🔥 Racha: <b id="juegoRacha">0</b></span><span class="pill">⏱ <span class="timer" id="juegoTiempo">10</span>s</span></div><div class="barra"><div id="juegoBarra"></div></div><div class="juego-pregunta" id="juegoPregunta"></div><div class="juego-texto" id="juegoTexto"></div><div id="juegoOpciones" class="opciones-juego"></div><div id="juegoFeedback"></div><button id="btnSiguienteJuego" class="boton boton-dorado oculto" style="margin-top:16px" onclick="siguientePreguntaJuego()">Siguiente →</button></div><div id="juegoFinal"></div><button class="boton" onclick="mostrarJuegos()" style="margin-top:16px">← Salir del juego</button></section>
+
+<section class="contenedor oculto" id="seccionNiveles"><div class="etiqueta" id="materiaSeleccionada"></div><h2 class="titulo-seccion">Elige tu nivel</h2><p class="descripcion">Avanza a tu propio ritmo y demuestra lo que sabes.</p><div class="niveles"><button class="nivel" onclick="abrirNivel('Básico')"><strong>01 · Básico</strong><span>Conceptos fundamentales</span></button><button class="nivel" onclick="abrirNivel('Intermedio')"><strong>02 · Intermedio</strong><span>Desarrollo de habilidades</span></button><button class="nivel" onclick="abrirNivel('Complejo')"><strong>03 · Complejo</strong><span>Retos de mayor dificultad</span></button></div><button class="boton" onclick="mostrarMaterias()" style="margin-top:20px">← Volver a materias</button></section>
+
+<section class="contenedor oculto" id="seccionTemas"><div class="etiqueta" id="datosNivel"></div><h2 class="titulo-seccion" id="tituloNivel"></h2><p class="descripcion">Elige un tema para ver su explicación completa y hacer su prueba.</p><input class="buscador" id="buscadorTemas" placeholder="🔍 Buscar tema... escribe fracciones, conectores, derivadas..." oninput="filtrarTemas()"><div id="listaTemas" class="lista-temas"></div><button class="boton" onclick="volverANiveles()" style="margin-top:20px">← Volver a niveles</button> <button class="boton" onclick="mostrarMaterias()">Volver a materias</button></section>
+
+<section class="contenedor oculto" id="seccionLeccion"><div class="etiqueta" id="datosLeccion"></div><h2 class="titulo-seccion" id="tituloLeccion"></h2><div class="leccion"><h3>Aprende antes de comenzar</h3><div id="contenidoLeccion"></div></div><h2 class="titulo-seccion">Pon a prueba tus conocimientos</h2><form id="formPreguntas"><div id="contenedorPreguntas"></div><button type="submit" class="boton boton-dorado">Calificar mi reto</button></form><div id="resultadoPrueba"></div><div id="zonaCertificado"></div><button class="boton" onclick="volverATemas()">← Volver a temas</button> <button class="boton" onclick="mostrarMaterias()">Regresar a materias</button></section>
+
+<section class="contenedor oculto" id="seccionAvance"><div class="etiqueta">Tu progreso</div><h2 class="titulo-seccion">Mi avance educativo</h2><p class="descripcion">Aquí puedes consultar los resultados de tus actividades y juegos.</p><div id="historial"></div><button class="boton" onclick="mostrarMaterias()">Continuar aprendiendo</button></section>
+
+<!-- CERTIFICADO -->
+<section class="contenedor oculto" id="seccionCertificado"><div id="certificadoBox" class="certificado"><div style="letter-spacing:4px;color:#8a6d2e">RETO EDUCATIVO · CERTIFICADO</div><h2>¡Felicidades!</h2><p style="margin:14px 0">Se otorga el presente reconocimiento a</p><h3 id="certNombre" style="font-size:28px;font-family:'Playfair Display'"></h3><p style="margin:14px 0">Por dominar el tema</p><h3 id="certTema" style="color:#8a6d2e"></h3><p id="certFecha" style="margin-top:14px;color:#666"></p><p style="margin-top:20px">⭐ 100% de aciertos ⭐</p></div><div style="text-align:center;margin-top:16px;display:flex;gap:10px;justify-content:center;flex-wrap:wrap"><button class="boton boton-dorado" onclick="window.print()">🖨️ Imprimir / Guardar PDF</button><button class="boton" onclick="mostrarMaterias()">Volver</button></div></section>
+
+<footer><p>RETO EDUCATIVO · Aprende, practica y supera tus límites.</p><p style="margin-top:8px">El conocimiento es tu mejor herramienta.</p></footer>
+<script>
+let materiaActual=""; let nivelActual=""; let temaActual=""; let temaActualObj=null; let guardandoResultado=false; let preguntasActuales=[]; let modoPractica=false; let listaTemasActual=[];
+const pregunta=(enunciado,opciones,correcta)=>({enunciado,opciones,correcta});
+// ===== TUS TEMAS ORIGINALES (sin cambios) =====
+const temas={
+ lengua:{
+  "Básico":[
+   {id:"ideas",nombre:"Ideas principales y secundarias",explicacion:"La idea principal expresa el mensaje central de un texto. Las ideas secundarias aportan detalles, ejemplos o razones que ayudan a comprenderla.",procedimiento:"Lee el texto completo, identifica de qué trata y pregúntate qué información es indispensable.",ejemplo:"Texto: Las abejas son importantes para la naturaleza. Transportan polen entre flores.\nIdea principal: Las abejas son importantes.",preguntas:[pregunta("¿Qué expresa la idea principal?",["El mensaje central del texto","Un detalle sin importancia","El nombre del autor"],0),pregunta("¿Para qué sirven las ideas secundarias?",["Para cambiar el tema","Para ampliar la idea principal","Para eliminar información"],1),pregunta("¿Qué debes hacer primero?",["Leerlo completo","Copiar la última oración","Contar sus palabras"],0)]},
+   {id:"tipos-texto",nombre:"Tipos de texto",explicacion:"Los textos pueden ser narrativos, descriptivos, expositivos, argumentativos o instructivos.",procedimiento:"Observa qué pretende hacer el texto: contar, describir, explicar, defender o dar instrucciones.",ejemplo:"Una receta es instructiva. Una noticia informa.",preguntas:[pregunta("¿Qué tipo cuenta acontecimientos?",["Narrativo","Instructivo","Argumentativo"],0),pregunta("¿Cuál defiende una opinión?",["Descriptivo","Argumentativo","Narrativo"],1),pregunta("¿Qué tipo explica cómo hacer algo?",["Poético","Narrativo","Instructivo"],2)]},
+   {id:"personajes",nombre:"Identificación de personajes",explicacion:"El protagonista ocupa el papel central; los secundarios acompañan.",procedimiento:"Identifica quién realiza las acciones y cómo se relaciona.",ejemplo:"Ana rescata a un perro, Ana es protagonista.",preguntas:[pregunta("¿Quién ocupa el papel central?",["El protagonista","El narrador siempre","El lector"],0),pregunta("¿Qué observar para identificar personajes?",["Solo el título","Sus acciones y relaciones","El número de páginas"],1),pregunta("¿Función de secundario?",["Apoyar o influir en la historia","Eliminar acontecimientos","Ser siempre el autor"],0)]}
+  ],
+  "Intermedio":[
+   {id:"narracion",nombre:"Elementos de la narración",explicacion:"Incluye personajes, narrador, espacio, tiempo y acontecimientos.",procedimiento:"Localiza quién cuenta, quién participa, dónde y cuándo.",ejemplo:"María caminó por el bosque al amanecer.",preguntas:[pregunta("¿Quién cuenta la historia?",["El narrador","El escenario","El conflicto"],0),pregunta("¿Dónde ocurren los hechos?",["En el tiempo","En el espacio","En el diálogo"],1),pregunta("¿Qué organiza los acontecimientos?",["La trama","El índice","La portada"],0)]},
+   {id:"estructura-texto",nombre:"Estructura de un texto",explicacion:"Introducción, desarrollo y conclusión.",procedimiento:"Busca presentación, desarrollo y cierre.",ejemplo:"Introducción: contaminación. Desarrollo: causas. Conclusión: acciones.",preguntas:[pregunta("¿Qué parte presenta el tema?",["Conclusión","Introducción","Anexo"],1),pregunta("¿Dónde se explican ideas con detalle?",["Desarrollo","Título","Portada"],0),pregunta("¿Qué hace la conclusión?",["Introducir personajes nuevos","Cerrar o sintetizar","Borrar el tema"],1)]},
+   {id:"parrafo-conectores",nombre:"Estructura del párrafo y conectores",explicacion:"Un párrafo reúne oraciones con una idea. Los conectores expresan adición, contraste, causa, etc.",procedimiento:"Identifica la idea que une las oraciones y usa conectores adecuados.",ejemplo:"Estudió con constancia; por eso, mejoró. 'Por eso' = consecuencia.",preguntas:[pregunta("¿Qué une las oraciones?",["Una idea relacionada","Cualquier palabra","Un número"],0),pregunta("¿Qué expresa 'sin embargo'?",["Adición","Contraste","Tiempo futuro"],1),pregunta("¿Qué expresa 'por lo tanto'?",["Consecuencia","Descripción","Duda"],0)]}
+  ],
+  "Complejo":[
+   {id:"resumen-parafrasis",nombre:"Resumen y paráfrasis",explicacion:"Resumen: ideas esenciales breves. Paráfrasis: con palabras propias.",procedimiento:"Lee, identifica ideas esenciales y redacta claro.",ejemplo:"Original: El ejercicio regular favorece la salud. Resumen: El ejercicio beneficia la salud.",preguntas:[pregunta("¿Finalidad de un resumen?",["Conservar ideas esenciales","Copiar cada oración","Cambiar el tema"],0),pregunta("¿Qué hace una paráfrasis?",["Cambia significado","Expresa con palabras propias","Elimina info"],1),pregunta("Si usas ideas ajenas, ¿qué hacer?",["Presentarlas como propias","Reconocer la fuente","Ocultar origen"],1)]},
+   {id:"analisis-textos",nombre:"Análisis de textos complejos",explicacion:"Examina propósito, argumentos, evidencias, tono y contexto.",procedimiento:"Identifica tesis, distingue argumentos y revisa evidencias.",ejemplo:"Afirmación: lectura diaria mejora vocabulario. Revisa la fuente.",preguntas:[pregunta("¿Qué es una tesis?",["Postura central","Número de párrafos","Palabra desconocida"],0),pregunta("¿Qué valora una evidencia?",["Su relación y confiabilidad","Tamaño de letra","Color portada"],0),pregunta("¿Qué distinguir al analizar?",["Hechos, opiniones y argumentos","Solo comas","Solo título"],0)]},
+   {id:"figuras-retoricas",nombre:"Figuras retóricas",explicacion:"Metáfora, símil, personificación e hipérbole.",procedimiento:"Observa si compara, da cualidades humanas o exagera.",ejemplo:"Metáfora: Tus ojos son estrellas. Símil: Brilla como estrella. Personificación: El viento susurraba.",preguntas:[pregunta("¿Qué figura en 'El viento susurraba'?",["Personificación","Hipérbole","Enumeración"],0),pregunta("¿Qué figura usa 'como'?",["Símil","Ironía","Anáfora"],0),pregunta("¿Qué figura exagera?",["Hipérbole","Definición","Conector"],0)]}
+  ]
+ },
+ matematicas:{
+  "Básico":[
+   {id:"operaciones",nombre:"Operaciones básicas",explicacion:"Suma, resta, multiplicación y división.",procedimiento:"Paréntesis, luego × ÷, luego + -.",ejemplo:"8+4=12, 10-3=7, 5×3=15, 12÷4=3",preguntas:[pregunta("¿Cuánto es 27 + 15?",["32","42","52"],1),pregunta("¿Cuánto es 8 × 7?",["54","56","64"],1),pregunta("¿Cuánto es 36 ÷ 6?",["5","6","7"],1)]},
+   {id:"fracciones",nombre:"Fracciones",explicacion:"Numerador y denominador. Partes de un todo.",procedimiento:"Mismo denominador: suma numeradores. Diferente: busca común.",ejemplo:"1/4+2/4=3/4. 1/2+1/3=5/6",preguntas:[pregunta("¿Cuánto es 2/7 + 3/7?",["5/7","5/14","6/7"],0),pregunta("¿Cuánto es 1/2 de 10?",["2","5","10"],1),pregunta("¿Simplificado de 4/8?",["2/4","1/2","4/4"],1)]},
+   {id:"geometria",nombre:"Figuras geométricas",explicacion:"Perímetro = contorno, Área = superficie.",procedimiento:"Rectángulo: Área=base×altura, Perímetro=2×(base+altura).",ejemplo:"Base 5, altura 3: Área 15, Perímetro 16",preguntas:[pregunta("¿Área rectángulo?",["Base × altura","Base + altura","2 × base"],0),pregunta("¿Lados hexágono?",["5","6","8"],1),pregunta("¿Qué mide perímetro?",["Superficie","Contorno","Volumen"],1)]},
+   {id:"decimal",nombre:"Multiplicación con punto decimal",explicacion:"Multiplica sin punto, luego cuenta decimales.",procedimiento:"25×12=300, con 2 decimales = 3.00 = 3",ejemplo:"2.5×1.2=3",preguntas:[pregunta("¿2.5 × 2?",["4.5","5","5.5"],1),pregunta("¿1.2 × 3?",["3.6","36","4.2"],0),pregunta("¿0.5 × 0.4?",["2","0.2","0.02"],2)]}
+  ],
+  "Intermedio":[
+   {id:"sistemas",nombre:"Sistema de ecuaciones",explicacion:"Dos ecuaciones que se cumplen a la vez.",procedimiento:"Sustitución, igualación o eliminación. Verifica.",ejemplo:"x+y=7, x-y=1 → x=4, y=3",preguntas:[pregunta("Si x+y=7 y x-y=1, ¿x?",["3","4","5"],1),pregunta("¿Qué es resolver un sistema?",["Encontrar valores que satisfacen","Borrar ecuación","Cambiar signos"],0),pregunta("Si x+y=10 y x=6, ¿y?",["4","6","16"],0)]},
+   {id:"funciones",nombre:"Funciones y gráficas",explicacion:"Cada entrada tiene una salida. Gráfica en plano.",procedimiento:"Sustituye x, calcula y, ubica (x,y).",ejemplo:"y=2x+1, x=3 → y=7, punto (3,7)",preguntas:[pregunta("Si y=2x+1, x=3, ¿y?",["6","7","8"],1),pregunta("¿Cómo se escribe un punto?",["(x, y)","(x + y)","x/y"],0),pregunta("¿Qué representa gráfica?",["Relación entre valores","Solo operación","Lista palabras"],0)]},
+   {id:"algebra",nombre:"Álgebra básica",explicacion:"Letras = variables. Términos semejantes se suman.",procedimiento:"Reduce semejantes, distributiva, misma operación en ambos lados.",ejemplo:"3x+2x=5x. x+4=9 → x=5",preguntas:[pregunta("¿3x+2x?",["5x","5x²","6x"],0),pregunta("Resuelve: x+6=10", ["x=4","x=16","x=6"],0),pregunta("¿2(x+3)?",["2x+3","2x+6","x+6"],1)]}
+  ],
+  "Complejo":[
+   {id:"cuadraticas",nombre:"Ecuaciones cuadráticas",explicacion:"ax²+bx+c=0, a≠0. Factorización o fórmula general.",procedimiento:"Identifica a,b,c, factoriza o usa fórmula.",ejemplo:"x²-5x+6=0 → (x-2)(x-3)=0 → x=2 y 3",preguntas:[pregunta("¿Forma general?",["ax²+bx+c=0","ax+b=0","x+y=z"],0),pregunta("¿Soluciones x²-5x+6=0?",["2 y 3","-2 y -3","1 y 6"],0),pregunta("¿Condición de a?",["Debe ser cero","Distinto de cero","Siempre uno"],1)]},
+   {id:"diferencial",nombre:"Cálculo diferencial",explicacion:"Derivada = tasa de cambio.",procedimiento:"Regla potencia: derivada de xⁿ = n·xⁿ⁻¹",ejemplo:"f(x)=x³ → f'=3x²",preguntas:[pregunta("¿Derivada de x²?",["x","2x","x³"],1),pregunta("¿Derivada de x³?",["3x²","x²","3x"],0),pregunta("¿Derivada de 5x?",["5","5x²","x"],0)]},
+   {id:"integral",nombre:"Cálculo integral",explicacion:"Acumulación. Integral = antiderivada.",procedimiento:"Integral de xⁿ = xⁿ⁺¹/(n+1)+C",ejemplo:"Integral de 2x = x²+C",preguntas:[pregunta("¿Antiderivada de 2x?",["x²+C","2+C","2x²+C"],0),pregunta("¿Qué es C?",["Constante de integración","Límite superior","Variable"],0),pregunta("¿Integral definida?",["F(sup)-F(inf)","Sumar límites","Multiplicar por cero"],0)]}
+  ]
+ }
+};
+// ===== FUNCIONES NUEVAS =====
+function cambiarModo(){ document.body.classList.toggle("claro"); localStorage.setItem("modo", document.body.classList.contains("claro")?"claro":"oscuro"); }
+if(localStorage.getItem("modo")==="claro") document.body.classList.add("claro");
+function setModoJuego(practica){ modoPractica=practica; document.getElementById("textoModoJuego").textContent = practica ? "📚 Estás en Modo Práctica: NO se guarda, puedes fallar sin miedo y sin tiempo estricto." : "🏆 Estás en Modo Competencia: tu resultado se guarda en Mi avance y en el Ranking."; document.getElementById("btnModoPractica").className = practica?"boton boton-dorado":"boton"; document.getElementById("btnModoNormal").className = !practica?"boton boton-dorado":"boton"; }
+function getPuntos(){ return parseInt(localStorage.getItem("puntosTotales")||"0"); }
+function sumarPuntos(p){ const n=getPuntos()+p; localStorage.setItem("puntosTotales", n); actualizarPerfil(); }
+function actualizarPerfil(){
+  const pts=getPuntos();
+  document.getElementById("puntosTotales").textContent=pts;
+  let nivel="🏆 Nivel 1 · Principiante", medallas=[];
+  if(pts>=300){ nivel="🏆 Nivel 4 · Maestro"; medallas=["🏆 Maestro","🔥 Imparable","⭐ Estrella"]; }
+  else if(pts>=150){ nivel="🏆 Nivel 3 · Experto"; medallas=["⭐ Experto","🔥 En racha"]; }
+  else if(pts>=50){ nivel="🏆 Nivel 2 · Explorador"; medallas=["🌟 Explorador"]; }
+  else medallas=["🌱 Principiante"];
+  const guardados=JSON.parse(localStorage.getItem("ranking")||"[]");
+  if(guardados.some(r=>r.puntos>=80)) medallas.push("🎯 Preciso");
+  document.getElementById("nivelUsuario").textContent=nivel;
+  document.getElementById("medallasUsuario").innerHTML=medallas.map(m=>`<span class="medalla">${m}</span>`).join("");
+  const hoy=new Date().toDateString(); const ultimo=localStorage.getItem("ultimoDia");
+  if(ultimo!==hoy){ localStorage.setItem("ultimoDia", hoy); }
+  document.getElementById("rachaTotal").textContent = (parseInt(localStorage.getItem("diasJugados")||"1"))+" días";
+}
+function guardarRanking(nombre, juego, puntos){
+  let r=JSON.parse(localStorage.getItem("ranking")||"[]");
+  r.push({nombre, juego, puntos, fecha:new Date().toLocaleDateString()});
+  r=r.sort((a,b)=>b.puntos-a.puntos).slice(0,5);
+  localStorage.setItem("ranking", JSON.stringify(r));
+  mostrarRanking();
+}
+function mostrarRanking(){
+  const r=JSON.parse(localStorage.getItem("ranking")||"[]");
+  const c=document.getElementById("podioRanking");
+  if(!c) return;
+  if(r.length===0){ c.innerHTML="<div>🥇 Sé el primero<br><small>Juega y aparece aquí</small></div>"; return; }
+  const med=["🥇","🥈","🥉","4️⃣","5️⃣"];
+  c.innerHTML=r.map((x,i)=>`<div>${med[i]} <b>${x.nombre}</b><br>${x.juego}<br><b style="color:var(--dorado)">${x.puntos} pts</b><br><small>${x.fecha}</small></div>`).join("");
+}
+const retosDia=[
+ {p:"¿Cuánto es 2/7 + 3/7 ?", ops:["5/7","5/14","6/7"], c:0, exp:"2+3=5, denominador 7."},
+ {p:"¿Qué figura es 'El viento susurraba'?", ops:["Personificación","Símil","Hipérbole"], c:0, exp:"Da cualidad humana al viento."},
+ {p:"¿Qué conector falta? Estudió mucho ___ mejoró.", ops:["por lo tanto","sin embargo","aunque"], c:0, exp:"Consecuencia."},
+ {p:"¿Derivada de x²?", ops:["2x","x","x³"], c:0, exp:"Regla potencia: 2x."},
+ {p:"¿Tipo de texto? 'Primero bate los huevos...'", ops:["Instructivo","Narrativo","Argumentativo"], c:0, exp:"Da pasos."},
+];
+function cargarRetoDia(){
+  const dia=new Date().getDate();
+  const r=retosDia[dia%retosDia.length];
+  document.getElementById("retoDiaPregunta").textContent=r.p;
+  const cont=document.getElementById("retoDiaOpciones"); cont.innerHTML="";
+  document.getElementById("retoDiaFeedback").innerHTML="";
+  r.ops.forEach((op,i)=>{ const b=document.createElement("button"); b.className="boton"; b.textContent=op; b.onclick=()=>{ document.getElementById("retoDiaFeedback").innerHTML = i===r.c ? `<div class="feedback ok">✅ ¡Correcto! ${r.exp} +10 pts</div>` : `<div class="feedback mal">❌ No es esa. Correcta: ${r.ops[r.c]}. ${r.exp}</div>`; if(i===r.c) sumarPuntos(10); }; cont.appendChild(b); });
+}
+function filtrarTemas(){
+  const q=document.getElementById("buscadorTemas").value.toLowerCase();
+  const cont=document.getElementById("listaTemas"); cont.innerHTML="";
+  listaTemasActual.filter(t=>t.nombre.toLowerCase().includes(q)).forEach((t,i)=>{
+    const b=document.createElement("button"); b.className="tema-card"; b.innerHTML=`<strong>${t.nombre}</strong><p>${t.explicacion.substring(0,120)}...</p><span>Ver explicación y prueba →</span>`; b.onclick=()=>abrirTema(t.id); cont.appendChild(b);
+  });
+  if(cont.innerHTML==="") cont.innerHTML="<p>No se encontró ese tema. Intenta con fracciones, conectores, derivadas...</p>";
+}
+function mostrarCertificado(tema){
+  ocultarTodo(); document.getElementById("seccionCertificado").classList.remove("oculto");
+  document.getElementById("certNombre").textContent=document.getElementById("nombreEstudiante").textContent||"Estudiante";
+  document.getElementById("certTema").textContent=tema;
+  document.getElementById("certFecha").textContent="Fecha: "+new Date().toLocaleDateString();
+}
+function mezclar(a){ return [...a].sort(()=>Math.random()-0.5); }
+function genCalculo(){
+  const lista=[];
+  for(let i=0;i<12;i++){
+    const tipo=Math.floor(Math.random()*5); let q, resp, expl;
+    if(tipo===0){ const a=5+Math.floor(Math.random()*40), b=5+Math.floor(Math.random()*30); q=`${a} + ${b} = ?`; resp=a+b; expl=`${a}+${b}=${resp} → Recuerda sumar unidades con unidades.`; }
+    else if(tipo===1){ const a=20+Math.floor(Math.random()*40), b=5+Math.floor(Math.random()*20); q=`${a} - ${b} = ?`; resp=a-b; expl=`${a}-${b}=${resp}`; }
+    else if(tipo===2){ const a=3+Math.floor(Math.random()*9), b=3+Math.floor(Math.random()*9); q=`${a} × ${b} = ?`; resp=a*b; expl=`${a}×${b}=${resp}. Ej: 7×8=56 porque 7+7+7+7+7+7+7+7=56`; }
+    else if(tipo===3){ const b=2+Math.floor(Math.random()*8), r=2+Math.floor(Math.random()*9), a=b*r; q=`${a} ÷ ${b} = ?`; resp=r; expl=`${a}÷${b}=${resp} porque ${b}×${resp}=${a}`; }
+    else { const a=(Math.random()*5+1).toFixed(1), b=2; q=`${a} × ${b} = ?`; resp=parseFloat((a*b).toFixed(1)); expl=`${a}×${b}=${resp}`; }
+    const ops=new Set([resp]); while(ops.size<4){ let f=resp + (Math.floor(Math.random()*7)-3); if(f!==resp) ops.add(f); }
+    const opciones=mezclar([...ops].map(String));
+    lista.push({texto:q, pregunta:`Calcula:`, opciones, correcta:opciones.indexOf(String(resp)), explicacion:expl});
+  } return lista;
+}
+const juegosDatos={
+ calculo:{titulo:"⚡ Cálculo Relámpago", cat:"Matemáticas · Juego", materia:"Matemáticas", tema:"Juego: Cálculo Relámpago", tiempo:10, generador:()=>genCalculo()},
+ atrapa:{titulo:"🎯 Atrapa el Resultado", cat:"Matemáticas · Juego", materia:"Matemáticas", tema:"Juego: Atrapa el Resultado", tiempo:15, preguntas:[
+  {pregunta:"¿Cuánto es 2/7 + 3/7 ?", texto:"Fracciones", opciones:["5/7","5/14","6/7","1/7"], correcta:0, explicacion:"Se suman numeradores: 2+3=5."},
+  {pregunta:"Rectángulo base 5, altura 3. ¿Área?", texto:"Área = base × altura", opciones:["8","15","16","12"], correcta:1, explicacion:"5 × 3 = 15. No sumes, multiplica."},
+  {pregunta:"¿Cuánto es 3x + 2x ?", texto:"Álgebra", opciones:["5x","5x²","6x","x"], correcta:0, explicacion:"3+2=5, la x se queda."},
+  {pregunta:"Si x+y=7 y x-y=1, ¿x?", texto:"Sistema", opciones:["3","4","5","2"], correcta:1, explicacion:"Sumando: 2x=8 → x=4"},
+  {pregunta:"¿Derivada de x³ ?", texto:"Cálculo", opciones:["3x²","x²","3x","x³"], correcta:0, explicacion:"Baja el 3: 3x²"},
+  {pregunta:"¿1.2 × 3 ?", texto:"Decimales", opciones:["3.6","36","4.2","1.5"], correcta:0, explicacion:"12×3=36, con 1 decimal = 3.6"},
+  {pregunta:"¿36 ÷ 6 ?", texto:"División", opciones:["5","6","7","4"], correcta:1, explicacion:"6×6=36"},
+  {pregunta:"¿2(x+3) ?", texto:"Distributiva", opciones:["2x+3","2x+6","x+6","2x"], correcta:1, explicacion:"2·x + 2·3 = 2x+6"}
+ ]},
+ vf:{titulo:"✅❌ Verdadero o Falso Exprés", cat:"Matemáticas · Juego", materia:"Matemáticas", tema:"Juego: Verdadero o Falso", tiempo:10, preguntas:[
+  {pregunta:"2(x+3) = 2x + 6", texto:"¿Verdadero o Falso?", opciones:["Verdadero","Falso"], correcta:0, explicacion:"Sí, distributiva."},
+  {pregunta:"1/2 + 1/2 = 1/4", texto:"¿Verdadero o Falso?", opciones:["Verdadero","Falso"], correcta:1, explicacion:"1/2+1/2=1, no 1/4."},
+  {pregunta:"El hexágono tiene 6 lados", texto:"¿Verdadero o Falso?", opciones:["Verdadero","Falso"], correcta:0, explicacion:"Hexa = 6."},
+  {pregunta:"La derivada de x² es x", texto:"¿Verdadero o Falso?", opciones:["Verdadero","Falso"], correcta:1, explicacion:"Es 2x, no x."},
+  {pregunta:"5 × 0 = 5", texto:"¿Verdadero o Falso?", opciones:["Verdadero","Falso"], correcta:1, explicacion:"Todo ×0 = 0."},
+  {pregunta:"Área rectángulo = base × altura", texto:"¿Verdadero o Falso?", opciones:["Verdadero","Falso"], correcta:0, explicacion:"Correcto."},
+  {pregunta:"x² - 5x + 6 = 0 tiene soluciones 2 y 3", texto:"¿Verdadero o Falso?", opciones:["Verdadero","Falso"], correcta:0, explicacion:"(x-2)(x-3)=0."},
+  {pregunta:"0.5 × 0.4 = 2", texto:"¿Verdadero o Falso?", opciones:["Verdadero","Falso"], correcta:1, explicacion:"Es 0.2, no 2."}
+ ]},
+ tipos:{titulo:"📖 ¿Qué tipo de texto es?", cat:"Lengua y Comunicación · Juego", materia:"Lengua y Comunicación", tema:"Juego: Tipos de texto", tiempo:15, preguntas:[
+  {pregunta:"'Primero bate los huevos, después agrega harina y hornea 30 minutos.'", texto:"¿Qué tipo?", opciones:["Instructivo","Narrativo","Argumentativo","Descriptivo"], correcta:0, explicacion:"Da pasos."},
+  {pregunta:"'Ana caminó por el bosque y encontró una casa.'", texto:"¿Qué tipo?", opciones:["Narrativo","Instructivo","Expositivo","Argumentativo"], correcta:0, explicacion:"Cuenta acontecimientos."},
+  {pregunta:"'Creo que deberíamos cuidar el agua porque es escasa.'", texto:"¿Qué tipo?", opciones:["Argumentativo","Narrativo","Instructivo","Descriptivo"], correcta:0, explicacion:"Defiende opinión."},
+  {pregunta:"'El volcán expulsa lava por su cráter.'", texto:"¿Qué tipo?", opciones:["Expositivo","Narrativo","Instructivo","Poético"], correcta:0, explicacion:"Explica info."},
+  {pregunta:"'La casa era alta, de paredes blancas.'", texto:"¿Qué tipo?", opciones:["Descriptivo","Narrativo","Argumentativo","Instructivo"], correcta:0, explicacion:"Describe."},
+  {pregunta:"'Para llegar, gira a la derecha y camina dos cuadras.'", texto:"¿Qué tipo?", opciones:["Instructivo","Argumentativo","Descriptivo","Narrativo"], correcta:0, explicacion:"Instrucciones."},
+  {pregunta:"'La lectura diaria puede mejorar tu vocabulario.'", texto:"¿Qué tipo?", opciones:["Argumentativo","Descriptivo","Narrativo","Instructivo"], correcta:0, explicacion:"Postura."},
+  {pregunta:"'Había una vez un rey...'", texto:"¿Qué tipo?", opciones:["Narrativo","Expositivo","Instructivo","Argumentativo"], correcta:0, explicacion:"Historia."}
+ ]},
+ conectores:{titulo:"🔗 Conectores Locos", cat:"Lengua y Comunicación · Juego", materia:"Lengua y Comunicación", tema:"Juego: Conectores", tiempo:15, preguntas:[
+  {pregunta:"Estudió mucho ___ mejoró sus calificaciones.", texto:"Consecuencia", opciones:["por lo tanto","sin embargo","aunque","además"], correcta:0, explicacion:"Consecuencia."},
+  {pregunta:"Quería ir al parque, ___ empezó a llover.", texto:"Contraste", opciones:["sin embargo","por lo tanto","además","porque"], correcta:0, explicacion:"Contraste."},
+  {pregunta:"Le gusta leer ___ escribir cuentos.", texto:"Adición", opciones:["además","y","sin embargo","aunque"], correcta:1, explicacion:"Suma: y."},
+  {pregunta:"No fue a clase ___ estaba enfermo.", texto:"Causa", opciones:["porque","sin embargo","por lo tanto","además"], correcta:0, explicacion:"Causa."},
+  {pregunta:"___ era tarde, siguió estudiando.", texto:"Concesión", opciones:["Aunque","Por lo tanto","Además","Entonces"], correcta:0, explicacion:"Aunque."},
+  {pregunta:"Terminó la tarea, ___ pudo jugar.", texto:"Consecuencia", opciones:["por eso","sin embargo","aunque","además"], correcta:0, explicacion:"Por eso."},
+  {pregunta:"Es bueno en matemáticas ___ en lengua.", texto:"Adición", opciones:["además","sin embargo","porque","aunque"], correcta:0, explicacion:"Además."},
+  {pregunta:"___ llovía mucho, el partido continuó.", texto:"Contraste", opciones:["Sin embargo","Porque","Además","Por lo tanto"], correcta:0, explicacion:"Contraste."}
+ ]},
+ figuras:{titulo:"✨ Figuras e Ideas", cat:"Lengua y Comunicación · Juego", materia:"Lengua y Comunicación", tema:"Juego: Figuras e Ideas", tiempo:15, preguntas:[
+  {pregunta:"'El viento susurraba entre los árboles.'", texto:"¿Qué figura?", opciones:["Personificación","Hipérbole","Símil","Metáfora"], correcta:0, explicacion:"Cualidad humana."},
+  {pregunta:"'Tus ojos son estrellas.'", texto:"¿Qué figura?", opciones:["Metáfora","Símil","Hipérbole","Personificación"], correcta:0, explicacion:"Sin 'como'."},
+  {pregunta:"'Brilla como una estrella.'", texto:"¿Qué figura?", opciones:["Símil","Metáfora","Hipérbole","Personificación"], correcta:0, explicacion:"Usa 'como'."},
+  {pregunta:"'Te esperé mil años.'", texto:"¿Qué figura?", opciones:["Hipérbole","Símil","Metáfora","Personificación"], correcta:0, explicacion:"Exagera."},
+  {pregunta:"'Las abejas son importantes. Transportan polen.'", texto:"¿Idea principal?", opciones:["Las abejas son importantes","Transportan polen","Las flores son bonitas","El polen es amarillo"], correcta:0, explicacion:"Mensaje central."},
+  {pregunta:"'El ejercicio regular favorece la salud.'", texto:"¿Resumen?", opciones:["El ejercicio beneficia la salud","El ejercicio es aburrido","Hay que correr","La salud es mala"], correcta:0, explicacion:"Idea esencial."},
+  {pregunta:"'Ana es la protagonista.'", texto:"¿Papel central?", opciones:["El protagonista","El lector","El autor","El narrador"], correcta:0, explicacion:"Protagonista."},
+  {pregunta:"'La lectura diaria puede mejorar el vocabulario.'", texto:"¿Qué es en argumentativo?", opciones:["Tesis","Conector","Personaje","Resumen"], correcta:0, explicacion:"Postura central."}
+ ]}
+};
+let juegoActual=null, juegoPreguntas=[], juegoIdx=0, juegoPuntos=0, juegoRacha=0, juegoAciertos=0, juegoTimer=null, juegoTiempoRest=10, juegoRespondido=false;
+function claveMateria(nombre){ if(!nombre) return "lengua"; if(nombre.toLowerCase().includes("lengua")) return "lengua"; return "matematicas"; }
+function ocultarTodo(){ ["portada","registro","login","panel","seccionNiveles","seccionTemas","seccionLeccion","seccionAvance","seccionJuegos","seccionJuegoActivo","seccionCertificado"].forEach(id=>document.getElementById(id).classList.add("oculto")); }
+function mostrarInicio(){ ocultarTodo(); if(document.getElementById("panel").dataset.activo==="si"){ document.getElementById("panel").classList.remove("oculto"); } else { document.getElementById("portada").classList.remove("oculto"); document.getElementById("registro").classList.remove("oculto"); } }
+function cambiarFormulario(tipo){ ocultarTodo(); document.getElementById(tipo).classList.remove("oculto"); }
+function mostrarPanel(nombre){ ocultarTodo(); document.getElementById("panel").classList.remove("oculto"); document.getElementById("nombreEstudiante").textContent=nombre; document.getElementById("panel").dataset.activo="si"; document.getElementById("btnSalir").hidden=false; actualizarPerfil(); cargarRetoDia(); mostrarRanking(); }
+function mostrarMaterias(){ ocultarTodo(); document.getElementById("panel").classList.remove("oculto"); }
+function mostrarJuegos(){ ocultarTodo(); document.getElementById("seccionJuegos").classList.remove("oculto"); mostrarRanking(); window.scrollTo({top:0,behavior:"smooth"}); }
+function volverANiveles(){ ocultarTodo(); document.getElementById("seccionNiveles").classList.remove("oculto"); }
+function volverATemas(){ ocultarTodo(); document.getElementById("seccionTemas").classList.remove("oculto"); }
+function seleccionarMateria(materia){ materiaActual=materia; ocultarTodo(); document.getElementById("materiaSeleccionada").textContent=materia; document.getElementById("seccionNiveles").classList.remove("oculto"); window.scrollTo({top:0,behavior:"smooth"}); }
+document.getElementById("formRegistro").addEventListener("submit", async function(e){
+ e.preventDefault(); const btn=this.querySelector("button"); btn.disabled=true;
+ const datos={nombre:document.getElementById("nombreRegistro").value.trim(), edad:document.getElementById("edadRegistro").value, contrasena:document.getElementById("passwordRegistro").value};
+ try{ const r=await fetch("/api/registro",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(datos)}); const res=await r.json(); if(!r.ok) throw new Error(res.mensaje||"No se pudo crear"); mostrarPanel(res.nombre); }catch(err){ document.getElementById("mensajeRegistro").innerHTML=`<div class="mensaje">${err.message}</div>`; } finally{ btn.disabled=false; }
+});
+document.getElementById("formLogin").addEventListener("submit", async function(e){
+ e.preventDefault(); const btn=this.querySelector("button"); btn.disabled=true;
+ const datos={nombre:document.getElementById("nombreLogin").value.trim(), contrasena:document.getElementById("passwordLogin").value};
+ try{ const r=await fetch("/api/login",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(datos)}); const res=await r.json(); if(!r.ok) throw new Error(res.mensaje||"No se pudo iniciar"); mostrarPanel(res.nombre); }catch(err){ document.getElementById("mensajeLogin").innerHTML=`<div class="mensaje">${err.message}</div>`; } finally{ btn.disabled=false; }
+});
+function abrirNivel(nivel){
+ nivelActual=nivel; listaTemasActual = temas[claveMateria(materiaActual)][nivel];
+ ocultarTodo(); document.getElementById("seccionTemas").classList.remove("oculto");
+ document.getElementById("datosNivel").textContent = materiaActual + " · Nivel " + nivel;
+ document.getElementById("tituloNivel").textContent = "Temas de " + nivel + " · " + listaTemasActual.length + " temas";
+ document.getElementById("buscadorTemas").value="";
+ filtrarTemas(); window.scrollTo({top:0,behavior:"smooth"});
+}
+function abrirLeccion(nivel){ abrirNivel(nivel); }
+function abrirTema(idTema){
+ const t = listaTemasActual.find(x=>x.id===idTema); if(!t) return;
+ temaActualObj=t; temaActual=t.nombre; preguntasActuales=t.preguntas;
+ ocultarTodo(); document.getElementById("seccionLeccion").classList.remove("oculto");
+ document.getElementById("datosLeccion").textContent = materiaActual + " · Nivel " + nivelActual + " · Tema " + t.nombre;
+ document.getElementById("tituloLeccion").textContent = t.nombre;
+ document.getElementById("contenidoLeccion").innerHTML = `<p><strong>¿Qué es?</strong><br>${t.explicacion}</p><p><strong>¿Cómo se realiza?</strong><br>${t.procedimiento}</p><p><strong>Ejemplo:</strong><br>${t.ejemplo}</p>`;
+ document.getElementById("resultadoPrueba").innerHTML=""; document.getElementById("zonaCertificado").innerHTML="";
+ dibujarPreguntas(preguntasActuales); window.scrollTo({top:0,behavior:"smooth"});
+}
+function dibujarPreguntas(preguntas){
+ const c=document.getElementById("contenedorPreguntas"); c.innerHTML="";
+ preguntas.forEach((pr,i)=>{ let ops=""; pr.opciones.forEach((op,j)=>{ ops+=`<label class="opcion"><input type="radio" name="pregunta${i}" value="${j}" required> ${op}</label>`; }); c.innerHTML+=`<div class="pregunta"><h4>${i+1}. ${pr.enunciado}</h4>${ops}</div>`; });
+}
+document.getElementById("formPreguntas").addEventListener("submit", async function(e){
+ e.preventDefault(); if(guardandoResultado) return;
+ let puntaje=0;
+ preguntasActuales.forEach((pr,i)=>{ const sel=document.querySelector(`input[name="pregunta${i}"]:checked`); if(sel && Number(sel.value)===pr.correcta) puntaje++; });
+ preguntasActuales.forEach((pr,i)=>{ const sel=document.querySelector(`input[name="pregunta${i}"]:checked`); const cont=document.querySelectorAll(".pregunta")[i]; if(!cont) return; cont.querySelectorAll(".opcion").forEach((lab,j)=>{ if(j===pr.correcta) lab.classList.add("correcta"); if(sel && Number(sel.value)===j && j!==pr.correcta) lab.classList.add("incorrecta"); }); });
+ const total=preguntasActuales.length; const porcentaje=Math.round(puntaje/total*100);
+ document.getElementById("resultadoPrueba").innerHTML=`<div class="resultado"><h3 style="font-family:'Playfair Display';color:var(--dorado)">Resultado - ${temaActual}</h3><p>Correctas: <strong>${puntaje} de ${total}</strong> · ${porcentaje}%</p><p>${porcentaje===100?"🏆 ¡Perfecto!":""} ${porcentaje>=60?"¡Muy bien! Sigue practicando.":"Repasa la lección e inténtalo de nuevo."}</p><div id="estadoGuardado" class="mensaje">Guardando...</div></div>`;
+ if(porcentaje===100){
+   sumarPuntos(20);
+   document.getElementById("zonaCertificado").innerHTML=`<div class="mensaje" style="text-align:center">🎉 ¡100%! Ganaste tu certificado +20 pts<br><button class="boton boton-dorado" style="margin-top:10px" onclick="mostrarCertificado('${temaActual}')">🏆 Ver mi Certificado</button></div>`;
+ }
+ guardandoResultado=true;
+ try{ const r=await fetch("/api/resultados",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({materia:materiaActual,tema:temaActual,nivel:nivelActual,puntaje:puntaje,total:total})}); const res=await r.json(); if(!r.ok) throw new Error(res.mensaje||"No se pudo guardar"); document.getElementById("estadoGuardado").textContent="Guardado correctamente."; }catch(err){ document.getElementById("estadoGuardado").textContent="No se pudo guardar: "+err.message; } finally{ guardandoResultado=false; }
+});
+function iniciarJuego(clave){
+ juegoActual=juegosDatos[clave];
+ juegoPreguntas = juegoActual.generador ? mezclar(juegoActual.generador()).slice(0,8) : mezclar(juegoActual.preguntas).slice(0,8);
+ juegoIdx=0; juegoPuntos=0; juegoRacha=0; juegoAciertos=0;
+ ocultarTodo(); document.getElementById("seccionJuegoActivo").classList.remove("oculto");
+ document.getElementById("juegoCategoria").textContent=juegoActual.cat + (modoPractica?" · 📚 PRÁCTICA":" · 🏆 COMPETENCIA");
+ document.getElementById("juegoTitulo").textContent=juegoActual.titulo;
+ document.getElementById("juegoFinal").innerHTML=""; document.querySelector("#seccionJuegoActivo .juego-box").classList.remove("oculto");
+ mostrarPreguntaJuego(); window.scrollTo({top:0,behavior:"smooth"});
+}
+function mostrarPreguntaJuego(){
+ juegoRespondido=false; const p=juegoPreguntas[juegoIdx];
+ document.getElementById("juegoProgreso").textContent=(juegoIdx+1)+" / "+juegoPreguntas.length;
+ document.getElementById("juegoPuntos").textContent=juegoPuntos; document.getElementById("juegoRacha").textContent=juegoRacha;
+ document.getElementById("juegoBarra").style.width=((juegoIdx)/juegoPreguntas.length*100)+"%";
+ document.getElementById("juegoPregunta").textContent=p.pregunta; document.getElementById("juegoTexto").textContent=p.texto||"";
+ document.getElementById("juegoFeedback").innerHTML=""; document.getElementById("btnSiguienteJuego").classList.add("oculto");
+ const cont=document.getElementById("juegoOpciones"); cont.innerHTML="";
+ p.opciones.forEach((op,i)=>{ const b=document.createElement("button"); b.className="btn-juego"; b.textContent=op; if(p.opciones.length===2) b.classList.add("btn-vf"); b.onclick=()=>responderJuego(i,b); cont.appendChild(b); });
+ clearInterval(juegoTimer); juegoTiempoRest = modoPractica ? 60 : juegoActual.tiempo;
+ const el=document.getElementById("juegoTiempo"); el.textContent=juegoTiempoRest; el.classList.remove("peligro");
+ juegoTimer=setInterval(()=>{ juegoTiempoRest--; el.textContent=juegoTiempoRest; if(juegoTiempoRest<=3) el.classList.add("peligro"); if(juegoTiempoRest<=0){ clearInterval(juegoTimer); responderJuego(-1,null); } },1000);
+}
+function responderJuego(idx,btn){
+ if(juegoRespondido) return; juegoRespondido=true; clearInterval(juegoTimer);
+ const p=juegoPreguntas[juegoIdx]; const esCorrecto = idx===p.correcta;
+ document.querySelectorAll("#juegoOpciones .btn-juego").forEach((b,i)=>{ if(i===p.correcta) b.classList.add("ok"); if(i===idx && !esCorrecto) b.classList.add("mal"); b.disabled=true; });
+ const fb=document.getElementById("juegoFeedback");
+ if(esCorrecto){ juegoAciertos++; juegoRacha++; const bonus=juegoRacha>=3?5:0; juegoPuntos+=10+bonus; fb.innerHTML=`<div class="feedback ok">✅ ¡Correcto! +${10+bonus} pts ${bonus?`(+${bonus} bonus racha 🔥)`:""}<br><b>${p.explicacion||""}</b></div>`; }
+ else { juegoRacha=0; fb.innerHTML=`<div class="feedback mal">❌ ${idx===-1?"¡Tiempo agotado!":"Incorrecto."}<br>Correcta: <b>${p.opciones[p.correcta]}</b><br>💡 ${p.explicacion||""}</div>`; }
+ document.getElementById("juegoPuntos").textContent=juegoPuntos; document.getElementById("juegoRacha").textContent=juegoRacha;
+ document.getElementById("btnSiguienteJuego").classList.remove("oculto");
+ document.getElementById("btnSiguienteJuego").textContent = juegoIdx===juegoPreguntas.length-1 ? "Ver resultado 🏆" : "Siguiente →";
+}
+function siguientePreguntaJuego(){ juegoIdx++; if(juegoIdx>=juegoPreguntas.length){ terminarJuego(); } else { mostrarPreguntaJuego(); } }
+async function terminarJuego(){
+ clearInterval(juegoTimer); document.getElementById("juegoBarra").style.width="100%"; document.querySelector("#seccionJuegoActivo .juego-box").classList.add("oculto");
+ const total=juegoPreguntas.length; const porc=Math.round(juegoAciertos/total*100);
+ const mensaje = porc===100?"🏆 ¡PERFECTO!": porc>=75?"🎉 ¡Excelente!": porc>=50?"👍 ¡Muy bien!":"💪 Tú puedes, inténtalo otra vez";
+ const nombre=document.getElementById("nombreEstudiante").textContent||"Estudiante";
+ document.getElementById("juegoFinal").innerHTML=`<div class="juego-box" style="text-align:center"><div class="etiqueta">${modoPractica?"📚 Práctica terminada":"🏆 Resultado"}</div><h2 style="font-family:'Playfair Display';font-size:32px">${juegoActual.titulo}</h2><p style="font-size:20px">${mensaje}</p><p>Aciertos: <b style="color:var(--dorado)">${juegoAciertos} / ${total} (${porc}%)</b> · Puntos: <b style="color:var(--dorado)">${juegoPuntos}</b></p><p id="guardadoJuego" class="mensaje">${modoPractica?"Modo Práctica: no se guardó, es solo para practicar.":"Guardando..."}</p><div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-top:16px"><button class="boton boton-dorado" onclick="iniciarJuego('${Object.keys(juegosDatos).find(k=>juegosDatos[k]===juegoActual)}')">🔁 Jugar de nuevo</button><button class="boton" onclick="mostrarJuegos()">Elegir otro juego</button><button class="boton" onclick="mostrarAvance()">Ver mi avance</button></div></div>`;
+ if(modoPractica) return;
+ sumarPuntos(juegoPuntos); guardarRanking(nombre, juegoActual.titulo, juegoPuntos);
+ try{ const r=await fetch("/api/resultados",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({materia:juegoActual.materia, tema:juegoActual.tema, nivel:"Juego", puntaje:juegoAciertos, total:total})}); const res=await r.json(); if(!r.ok) throw new Error(res.mensaje||"No se pudo guardar"); document.getElementById("guardadoJuego").textContent="✅ Guardado en Mi avance + Ranking."; }catch(e){ document.getElementById("guardadoJuego").textContent="⚠️ No se pudo guardar en servidor: "+e.message+" (pero sí quedó en Ranking local)"; }
+ window.scrollTo({top:0,behavior:"smooth"});
+}
+async function mostrarAvance(){
+ ocultarTodo(); document.getElementById("seccionAvance").classList.remove("oculto");
+ const h=document.getElementById("historial"); h.innerHTML="<p>Consultando...</p>";
+ try{ const r=await fetch("/api/avance"); const d=await r.json(); if(!r.ok) throw new Error(d.mensaje||"Error"); h.innerHTML=""; if(d.resultados.length===0){ h.innerHTML=`<div class="mensaje">Todavía no tienes resultados. ¡Comienza tu primer reto!</div>`; return; } d.resultados.forEach(res=>{ const p=Math.round(res.puntaje/res.total*100); const div=document.createElement("div"); div.className="resultado"; div.innerHTML=`<strong>${res.materia}</strong><p>${res.tema} · Nivel ${res.nivel}</p><p>Resultado: ${res.puntaje}/${res.total} (${p}%)</p><p>Fecha: ${res.fecha}</p>`; h.appendChild(div); }); }catch(err){ h.textContent=err.message; }
+}
+async function cerrarSesion(){ try{ await fetch("/api/logout",{method:"POST"}); document.getElementById("panel").dataset.activo="no"; document.getElementById("btnSalir").hidden=true; document.getElementById("formRegistro").reset(); document.getElementById("formLogin").reset(); mostrarInicio(); }catch{ alert("No se pudo cerrar sesión"); } }
+async function recuperarSesion(){ try{ const r=await fetch("/api/sesion"); const d=await r.json(); if(r.ok && d.ok) mostrarPanel(d.nombre); else mostrarInicio(); }catch{ mostrarInicio(); } }
+mostrarRanking(); actualizarPerfil(); recuperarSesion();
+</script>
+</body>
+</html>
+
