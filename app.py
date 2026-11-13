@@ -2,7 +2,7 @@ from flask import Flask, render_template, request, jsonify, session
 import sqlite3, hashlib, secrets, os
 from functools import wraps
 
-app = Flask(__name__, template_folder='.', static_folder='.'),static'_url_path='')
+app = Flask(__name__)
 app.secret_key = os.environ.get("SECRET_KEY", secrets.token_hex(32))
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
